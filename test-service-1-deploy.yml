@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-service-1-deployment
+spec:
+  selector:
+    matchLabels:
+      app: test-service-1
+  template:
+    metadata:
+      labels:
+        app: test-service-1
+    spec:
+      containers:
+      - name: test-service-1
+        image: ngchanell/test-service-1
+        ports:
+        - containerPort: 8080
