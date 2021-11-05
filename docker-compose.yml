@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    image: reverse-proxy
+    build:
+      context: .
+    container_name: reverse-proxy
+    depends_on:
+      - test-service-1
+      - test-service-2
+    ports:
+      - 8080:80
+    restart: on-failure
+
+  test-service-1:
+    image: test-service-1
+    container_name: test-service-1
+    build:
+      context: ./test-service-1
+    ports:
+      - 8081:8080
+    restart: on-failure
+
+  test-service-2:
+    image: test-service-2
+    container_name: test-service-2
+    build:
+      context: ./test-service-2
+    ports:
+      - 8082:8080
+    restart: on-failure
