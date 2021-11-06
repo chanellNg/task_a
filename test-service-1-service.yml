@@ -6,6 +6,8 @@ spec:
   selector:
     app: test-service-1
   ports:
-    - port: 80
+    - name: test-service-1-port
+      protocol: TCP
+      port: 80
       targetPort: 8080
-  type: LoadBalancer
+

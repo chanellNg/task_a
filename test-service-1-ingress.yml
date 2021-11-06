@@ -1,14 +1,23 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: test-service-1-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    nginx.ingress.kubernetes.io/affinity-mode: persistent
+    nginx.ingress.kubernetes.io/session-cookie-hash: sha1
 spec:
-  externalIPs:
-  - 203.0.113.1
   rules:
-  - host: mynodeapp.com
+  - host: localhost
     http:
       paths:
       - backend:
-          serviceName: test-service-1
-          servicePort: 80
+          service:
+            name: test-service-1
+            port: 
+              number: 80
+        path: /
+        pathType: Prefix
