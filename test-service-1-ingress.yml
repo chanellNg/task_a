@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test-service-1-ingress
+spec:
+  externalIPs:
+  - 203.0.113.1
+  rules:
+  - host: mynodeapp.com
+    http:
+      paths:
+      - backend:
+          serviceName: test-service-1
+          servicePort: 80
